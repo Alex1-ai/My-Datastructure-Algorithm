@@ -18,7 +18,7 @@ def binarySearch(num, searchList):
     return -1  # Element not found in the list
 
 # Example usage:
-result = binarySearch(7, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+result = binarySearch("iJeoma", ["abena", "belinda", "cashew", "Daire", "Futon", "George", "Hannah", "iJeoma", "jennifer", "Kamaela"])
 
 if result != -1:
     print(f"Element found at index {result}")
