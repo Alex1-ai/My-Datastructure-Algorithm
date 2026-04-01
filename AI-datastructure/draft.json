@@ -1,0 +1,173 @@
+{
+  "selected_function": "list_drafts",
+  "arguments": {
+      "maxResults": 500,
+      "userId": "me"
+    }
+
+}
+
+
+{
+              "id": "draft_001",
+              "message": {
+                "id": "draft_msg_001",
+                "threadId": "thread_draft_001"
+              }
+}
+
+{
+  "selected_function": "send_draft",
+  "arguments": {
+      "id": "draft_001",
+      "userId": "me",
+      "message": {
+        "id": "draft_msg_001",
+        "threadId": "thread_draft_001"
+      }
+
+    }
+
+}
+
+
+{
+  "name": "send_draft",
+  "description": "Sends the specified, existing draft to the recipients",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the draft to send"
+      },
+      "userId": {
+        "type": "string",
+        "description": "Email address of the user to fetch the profile",
+        "pattern": "^(?:me|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})$"
+      },
+      "message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the message"
+          },
+          "threadId": {
+            "type": "string",
+            "description": "The ID of the thread the message belongs to"
+          },
+          "labelIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of IDs of labels to apply to this message",
+            "default": [
+
+            ]
+          },
+          "snippet": {
+            "type": "string",
+            "description": "A short snippet of the message content"
+          },
+          "historyId": {
+            "type": "string",
+            "description": "The ID of the last history record that modified this message"
+          },
+          "internalDate": {
+            "type": "string",
+            "description": "The internal date of the message in UNIX ms timestamp format"
+          },
+          "payload": {
+            "type": "object",
+            "description": "The parsed email structure in the message parts",
+            "properties": {
+              "partId": {
+                "type": "string",
+                "description": "The MIME part ID"
+              },
+              "mimeType": {
+                "type": "string",
+                "description": "The MIME type of the message part"
+              },
+              "filename": {
+                "type": "string",
+                "description": "The filename of the attachment (if any)"
+              },
+              "headers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "body": {
+                "type": "object",
+                "properties": {
+                  "attachmentId": {
+                    "type": "string",
+                    "description": "The ID of the attachment"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "description": "Size of the body in bytes, must be greater than 0"
+                  },
+                  "data": {
+                    "type": "string",
+                    "description": "The body data of the message part, required"
+                  }
+                },
+                "required": [
+                  "data",
+                  "size"
+                ]
+              },
+              "parts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Child message parts (for multipart messages)"
+                }
+              }
+            }
+          },
+          "sizeEstimate": {
+            "type": "integer",
+            "description": "Estimated size of the message in bytes"
+          },
+          "raw": {
+            "type": "string",
+            "description": "The entire email message in an RFC 2822 formatted and base64url encoded string"
+          }
+        },
+        "required": [
+
+        ],
+        "oneOf": [
+          {
+            "required": [
+              "raw"
+            ]
+          },
+          {
+            "required": [
+              "payload"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "message"
+    ]
+  }
+}
